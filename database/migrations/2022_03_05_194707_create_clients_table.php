@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('country');
+            $table->bigInteger('project_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

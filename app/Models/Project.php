@@ -13,7 +13,8 @@ class Project extends Model
         'name',
         'date_start',
         'is_active',
-        'client_id'
+        'client_id',
+        'department_id'
     ];
 
     public function client(){

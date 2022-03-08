@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->integer('level')->default(3);
-
             $table->integer('phone')->nullable();
             $table->string('email')->nullable();
-
+            $table->integer('department_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

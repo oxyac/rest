@@ -10,20 +10,25 @@ class Department extends Model
     use HasFactory;
 
     protected $fillable = [
-        'project_name',
+        'name',
         'language',
-        'project_id',
-        'lead_id'
     ];
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->hasOne(Project::class);
     }
 
     public function lead()
     {
-        return $this->belongsTo(Lead::class);
+        return $this->hasOne(Lead::class);
     }
+
+    public function programmers(){
+        return $this->belongsToMany('App\Models\Programmer');
+    }
+
+
+
 
 }

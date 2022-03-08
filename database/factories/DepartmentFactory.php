@@ -20,8 +20,10 @@ class DepartmentFactory extends Factory
     {
         return [
             'language' => $this->faker->languageCode(),
-            'project_id' => Project::factory()->create()->id,
-            'lead_id' => Lead::factory()->create()->id
+            'name' => $this->faker->domainName(),
+//            'department_id' => 1
+//            'project_id' => Project::factory()->create()->id,
+//            'lead_id' => Lead::factory()->create()->id
         ];
     }
 }

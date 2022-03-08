@@ -13,4 +13,8 @@ class Client extends Model
         'name',
         'country'
     ];
+
+    public function project(){
+        return $this->hasOne(Project::class);
+    }
 }

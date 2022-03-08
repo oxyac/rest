@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Services\Programmer\ProgrammerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -81,6 +82,13 @@ class ProgrammerController extends Controller
     {
         $this->service->update($request, $id);
     }
+
+    public function assign(Request $request, $programmer_ids){
+        return json_encode($programmer_ids);
+        $response = new Response();
+        return $response->setContent($this->service->getItems()->toArray());
+    }
+
 
     /**
      * Remove the specified resource from storage.

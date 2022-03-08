@@ -25,7 +25,7 @@ class ProgrammerFactory extends Factory
             'phone' => intval("373" . rand(1, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9)),
             'first_name' => $this->faker->firstNameFemale(),
             'last_name' => $this->faker->lastName(),
-            'department_id' => 1
+//            'department_id' => 1
         ];
     }
 }

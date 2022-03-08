@@ -14,36 +14,30 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('departments', function (Blueprint $table) {
-            $table->bigInteger('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
 
-            $table->bigInteger('lead_id')->unsigned();
-            $table->foreign('lead_id')->references('id')->on('leads');
-        });
-        Schema::table('programmers', function (Blueprint $table) {
-            $table->bigInteger('department_id')->unsigned();
+        Schema::table('projects', function (Blueprint $table) {
             $table->foreign('department_id')->references('id')->on('departments');
         });
-        Schema::table('projects', function (Blueprint $table) {
-            $table->bigInteger('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('clients');
+
+        Schema::table('clients', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
         });
+        DB::table('projects')->insert(
+            array(
+                'id' => 1,
+                'name' => 'manager.go'
+            )
+        );
         DB::table('clients')->insert(
             array(
                 'id' => 1,
                 'name' => 'Megafon',
-                'country' => 'MD'
+                'country' => 'Moldova',
+                'project_id' => 1
             )
         );
 
-        DB::table('projects')->insert(
-            array(
-                'id' => 1,
-                'name' => 'manager.go',
-                'client_id' => 1
-            )
-        );
+
 
         DB::table('leads')->insert(
             array(
@@ -56,8 +50,7 @@ return new class extends Migration
             array(
                 'id' => 1,
                 'language' => 'Moldavian',
-                'project_id' => 1,
-                'lead_id' => 1
+                'name' => 'Moldavian'
             )
         );
     }

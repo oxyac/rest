@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Services\Department\DepartmentService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DepartmentController extends Controller
 {
@@ -21,7 +22,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-
+        return Department::all();
     }
 
     /**
@@ -31,7 +32,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -52,9 +53,11 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Department $department)
     {
-        //
+        $response = new Response();
+        $response_content =  $this->service->show($department);
+        return $response->setContent($response_content);
     }
 
     /**
@@ -77,14 +80,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        $department = $this->service->store($request, $department);
-
-        return ResponseService::sendJsonReponse(
-            true,
-            [
-                'item' => $department->toArray()
-            ]
-        );
+        return $this->service->store($request, $department);
     }
 
     /**

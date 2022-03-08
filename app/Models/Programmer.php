@@ -15,7 +15,7 @@ class Programmer extends Model
         'level',
         'phone',
         'email',
-        'department_id'
+//        'department_id'
     ];
 
     public function department()

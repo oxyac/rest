@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
         $clientId = Client::factory()->create()->id;
         return [
             'name' => $this->faker->name(),
-            'client_id' => $clientId
+//            'client_id' => $clientId
         ];
     }
 }

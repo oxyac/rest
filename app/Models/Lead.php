@@ -16,4 +16,8 @@ class Lead extends Model
         'phone',
         'email'
     ];
+
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
 }

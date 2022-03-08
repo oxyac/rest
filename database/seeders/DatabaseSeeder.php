@@ -30,6 +30,13 @@ class DatabaseSeeder extends Seeder
         }
 
         Department::factory()->create();
+        DB::table('leads')->insert([
+            'first_name' => Str::random(10),
+            'last_name' => Str::random(10),
+            'email' => Str::random(10) . '@gmail.com',
+            'phone' => intval("373" . rand(1, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9)),
+            'department_id' => 1
+        ]);
 
 //        DB::table('projects')->insert([
 //            'name' => Str::random(10),

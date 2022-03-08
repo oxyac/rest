@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('name');
             $table->time('date_start')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('is_active')->default(true);
+            $table->bigInteger('department_id')->unsigned()->nullable();
 
             $table->timestamps();
         });

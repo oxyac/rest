@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Services\Project\ProjectService;
 use App\Services\Response\ResponseService;
 use Illuminate\Http\Request;
@@ -68,6 +69,13 @@ class ProjectController extends Controller
     {
         //
     }
+
+    public function assign(Request $request, Project $project)
+    {
+        $this->service->assign($request, $project);
+    }
+
+
 
     /**
      * Update the specified resource in storage.
