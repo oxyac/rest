@@ -3,16 +3,33 @@
 namespace App\Services\Department;
 
 use App\Models\Department;
+use App\Models\Lead;
 use App\Models\Programmer;
 use App\Models\Project;
+use App\Services\ApiService;
+use Illuminate\Support\Facades\DB;
 
-class DepartmentService
+class DepartmentService extends ApiService
 {
-    public function store($request, $department){
+    public function store($request, $id = null){
 
         $project_id = $request->project_id ?? null;
         $programmer_ids = $request->programmer_ids ?? null;
+        $lead_id = $request->lead_id ?? null;
 
+        if($id){
+            $department = Department::find($id);
+            if(!$department){
+                return null;
+            }
+
+        } else{
+            $department = new Department();
+        }
+//        var_dump($request);die;
+        if($lead_id){
+            $department->lead_id = $lead_id;
+        }
         $department->fill($request->only($department->getFillable()));
         $department->save();
 

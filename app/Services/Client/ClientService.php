@@ -2,7 +2,7 @@
 
 namespace App\Services\Client;
 
-class ClientService
+class ClientService extends \App\Services\ApiService
 {
 
 }

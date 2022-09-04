@@ -7,8 +7,9 @@ use App\Models\Department;
 use App\Services\Department\DepartmentService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\FlareClient\Solutions\ReportSolution;
 
-class DepartmentController extends Controller
+class DepartmentController extends ApiController
 {
     public function __construct(DepartmentService $service)
     {
@@ -22,43 +23,16 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return Department::all();
+        return new Response(Department::with('project', 'programmers', 'lead')->get());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function paginate()
     {
-
+        return new Response(Department::with('project', 'programmers', 'lead')->paginate(20));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, Department $department)
-    {
 
-        return $this->service->store($request, $department);
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Department $department)
-    {
-        $response = new Response();
-        $response_content =  $this->service->show($department);
-        return $response->setContent($response_content);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,17 +45,6 @@ class DepartmentController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Department $department)
-    {
-        return $this->service->store($request, $department);
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -89,8 +52,8 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $res = Department::where('id',$request->get())->delete();
     }
 }

@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leads', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->integer('level')->default(3);
-            $table->integer('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->integer('department_id')->unsigned()->nullable();
+            $table->string('title', 200);
+            $table->string('body', 600);
+            $table->bigInteger('author_id')->unsigned()->nullable();
+            $table->softDeletes();
+            $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leads');
+        Schema::dropIfExists('posts');
     }
 };
